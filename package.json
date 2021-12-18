@@ -1,0 +1,29 @@
+{
+  "name": "lic",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "server": "set NODE_ENV=dev && nodemon index.js",
+    "client": "npm run start --prefix client",
+    "dev-all": "npm-run-all --parallel server client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^6.4.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mysql2": "^2.3.3",
+    "nodemon": "^2.0.15",
+    "npm-run-all": "^4.1.5",
+    "passport": "^0.5.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
+    "sequelize": "^6.12.0-beta.3",
+    "validator": "^13.7.0"
+  }
+}
