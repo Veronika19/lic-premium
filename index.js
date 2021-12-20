@@ -1,4 +1,5 @@
 import express from 'express';
+import path from 'path';
 const app = express();
 
 import './config/index.js';
@@ -14,9 +15,8 @@ app.use('/user', routes.Users);
 console.log('=======', process.env.NODE_ENV);
 
 if (process.env.NODE_ENV === 'production') {
-  console.log('=======', process.env.NODE_ENV);
   // server static assets files
-  app.use(express.static('client/build'));
+  app.use(express.static(path.resolve(__dirname, './client/build')));
 
   // serve index.html i any route is not found
   const path = require('path');
