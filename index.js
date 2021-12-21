@@ -16,6 +16,7 @@ console.log('=======', process.env.NODE_ENV);
 
 if (process.env.NODE_ENV === 'production') {
   // server static assets files
+  const __dirname = path.resolve();
   app.use(express.static(path.resolve(__dirname, './client/build')));
 
   // serve index.html i any route is not found
