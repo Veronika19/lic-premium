@@ -1,4 +1,4 @@
-import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function App() {
   return (
@@ -9,6 +9,12 @@ export default function App() {
             <div className="bg-white mt-10 flex flex-col items-start justify-between pt-4 pb-4 sm:pt-8 px-5 sm:px-10 shadow rounded-t">
               <div className="flex items-center mb-4 xl:mb-0">
                 <h2 className="text-gray-800 text-2xl ">User Experience Revamp and Optimization</h2>
+                <button
+                  id="downloadAll-btn"
+                  className="bg-gray-200 transition duration-150 ease-in-out focus:outline-none hover:bg-gray-300 rounded text-indigo-500 px-5 h-8 flex items-center text-sm"
+                >
+                  <Link to="/add-policy">Add Policy</Link>
+                </button>
               </div>
             </div>
           </div>

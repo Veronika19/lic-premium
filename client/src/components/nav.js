@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 const Nav = () => {
   return (
     <div className="w-full mx-auto bg-white shadow px-5 sm:px-10">
@@ -46,10 +48,10 @@ const Nav = () => {
           </a>
           <ul className="pr-12 xl:flex items-center h-full hidden">
             <li className="cursor-pointer h-full flex items-center text-sm text-gray-800 tracking-normal border-b-2 border-transparent">
-              <a href="index.html">Dashboard</a>
+              <Link to="/">Dashboard</Link>
             </li>
             <li className="cursor-pointer h-full flex items-center text-sm text-indigo-500 mx-10 tracking-normal border-b-2 border-indigo-500">
-              <a href="project-overview-bl.html">Project Overview</a>
+              <Link to="/add-policy">Add Policy</Link>
             </li>
           </ul>
         </div>
