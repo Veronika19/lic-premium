@@ -5,7 +5,7 @@ import policyValidator from '../validations/premium-add.js';
 import { addPremium, findAllPremium } from '../infra/premium-dao.js';
 
 router.post('/add', async (req, res) => {
-  console.log(req.body);
+  console.log('=======body', req.body);
 
   const { errors, isValid } = policyValidator(req.body);
   if (!isValid) {

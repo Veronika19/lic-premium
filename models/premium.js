@@ -10,6 +10,10 @@ let premiumSch = connection.define(
       primaryKey: true,
       autoIncrement: true,
     },
+    policy_number: {
+      type: Sequelize.INTEGER.UNSIGNED,
+      allowNull: false,
+    },
     first_name: {
       type: Sequelize.STRING,
       allowNull: false,

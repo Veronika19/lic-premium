@@ -12,7 +12,7 @@ export default (data) => {
   data.pay_mode = !isEmpty(data.pay_mode) ? data.pay_mode : '';
   data.premium_amt = !isEmpty(data.premium_amt) ? data.premium_amt : '';
 
-  if (Validator.isEmpty(data.policy_number)) {
+  if (Validator.isEmpty(data.policy_number.toString())) {
     errors.policy_number = 'Please enter the policy number';
   }
 
