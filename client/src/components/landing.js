@@ -1,6 +1,55 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { findPolicy } from '../actions/policyActions';
 
 export default function App() {
+  console.count('landing count');
+  const dispatch = useDispatch();
+  const { policies, status } = useSelector((state) => state.policyData);
+
+  useEffect(() => {
+    dispatch(findPolicy());
+  }, [dispatch]);
+
+  let policiesLists = null;
+  if (status === false) {
+    window.flash('Unable to load policies');
+  } else if (policies && policies.length >= 1) {
+    policiesLists = policies.map((each) => {
+      return (
+        <tr key={each.id} className="h-24 border-gray-300 border-b">
+          <td className="pl-8 pr-6 text-left whitespace-no-wrap text-sm text-gray-800 tracking-normal leading-4">
+            <input
+              type="checkbox"
+              className="w-5 h-5 cursor-pointer border rounded border-gray-400 bg-white"
+              onClick="tableInteract(this)"
+            />
+          </td>
+          <td className="text-sm pr-6 whitespace-no-wrap text-gray-800 tracking-normal leading-4">
+            {each.policy_number}
+          </td>
+          <td className="text-sm pr-6 whitespace-no-wrap text-gray-800 tracking-normal leading-4">
+            {`${each.first_name} ${each.last_name}`}
+          </td>
+          <td className="text-sm pr-6 whitespace-no-wrap text-gray-800 tracking-normal leading-4">
+            {each.date_of_commence}
+          </td>
+          <td className="text-sm pr-6 whitespace-no-wrap text-gray-800 tracking-normal leading-4">
+            {each.table_term}
+          </td>
+          <td className="text-sm pr-6 whitespace-no-wrap text-gray-800 tracking-normal leading-4">
+            {each.pay_mode}
+          </td>
+          <td className="text-sm pr-6 whitespace-no-wrap text-gray-800 tracking-normal leading-4">
+            {each.premium_amt}
+          </td>
+        </tr>
+      );
+    });
+  }
+
   return (
     <>
       <div className="container mx-auto px-5 sm:px-10">
@@ -25,7 +74,7 @@ export default function App() {
           <div className="container mx-auto">
             <div className="w-full">
               <div className="container mx-auto bg-white py-5 flex items-start sm:items-center justify-between px-5 sm:px-10 shadow rounded-t">
-                <h2 className="text-gray-800 text-2xl ">Invoice Report</h2>
+                <h2 className="text-gray-800 text-2xl">Invoice Report</h2>
               </div>
 
               <div className="mx-auto mb-10 bg-white shadow">
@@ -148,194 +197,26 @@ export default function App() {
                           />
                         </th>
                         <th className="text-gray-600 font-normal pr-6 text-left text-sm tracking-normal leading-4">
-                          <div className="opacity-0 cursor-default relative w-10">
-                            <div className="absolute top-0 right-0 w-5 h-5 mr-2 -mt-1 rounded-full bg-indigo-500 text-white flex justify-center items-center text-xs">
-                              3
-                            </div>
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="text-gray-600 icon icon-tabler icon-tabler-file"
-                              width="28"
-                              height="28"
-                              viewBox="0 0 24 24"
-                              strokeWidth="1.5"
-                              stroke="currentColor"
-                              fill="none"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            >
-                              <path stroke="none" d="M0 0h24v24H0z" />
-                              <path d="M14 3v4a1 1 0 0 0 1 1h4" />
-                              <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
-                            </svg>
-                          </div>
+                          Policy Number
                         </th>
                         <th className="text-gray-600 font-normal pr-6 text-left text-sm tracking-normal leading-4">
-                          Invoice Number
+                          Name
                         </th>
                         <th className="text-gray-600 font-normal pr-6 text-left text-sm tracking-normal leading-4">
-                          Client
+                          Date Of Commencment
                         </th>
                         <th className="text-gray-600 font-normal pr-6 text-left text-sm tracking-normal leading-4">
-                          Company Contact
+                          Table term
                         </th>
                         <th className="text-gray-600 font-normal pr-6 text-left text-sm tracking-normal leading-4">
-                          Amount
+                          Payment mode
                         </th>
                         <th className="text-gray-600 font-normal pr-6 text-left text-sm tracking-normal leading-4">
-                          Date
+                          Premium amount
                         </th>
-                        <th className="text-gray-600 font-normal pr-6 text-left text-sm tracking-normal leading-4">
-                          <div className="opacity-0 w-2 h-2 rounded-full bg-indigo-400"></div>
-                        </th>
-                        <td className="text-gray-600 font-normal pr-8 text-sm tracking-normal leading-4 text-right">
-                          More
-                        </td>
                       </tr>
                     </thead>
-                    <tbody>
-                      <tr className="h-24 border-gray-300 border-b">
-                        <td className="pl-8 pr-6 text-left whitespace-no-wrap text-sm text-gray-800 tracking-normal leading-4">
-                          <input
-                            type="checkbox"
-                            className="w-5 h-5 cursor-pointer border rounded border-gray-400 bg-white"
-                            onClick="tableInteract(this)"
-                          />
-                        </td>
-                        <td className="text-sm pr-6 whitespace-no-wrap text-gray-800 tracking-normal leading-4">
-                          <div className="relative w-10">
-                            <div className="absolute top-0 right-0 w-5 h-5 mr-2 -mt-1 rounded-full bg-indigo-500 text-white flex justify-center items-center text-xs">
-                              3
-                            </div>
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="text-gray-600 icon icon-tabler icon-tabler-file"
-                              width="28"
-                              height="28"
-                              viewBox="0 0 24 24"
-                              strokeWidth="1.5"
-                              stroke="currentColor"
-                              fill="none"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            >
-                              <path stroke="none" d="M0 0h24v24H0z" />
-                              <path d="M14 3v4a1 1 0 0 0 1 1h4" />
-                              <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
-                            </svg>
-                          </div>
-                        </td>
-                        <td className="text-sm pr-6 whitespace-no-wrap text-gray-800 tracking-normal leading-4">
-                          #MC10023
-                        </td>
-                        <td className="text-sm pr-6 whitespace-no-wrap text-gray-800 tracking-normal leading-4">
-                          User Research
-                        </td>
-                        <td className="pr-6 whitespace-no-wrap">
-                          <div className="flex items-center">
-                            <div className="h-8 w-8">
-                              <img
-                                src="https://cdn.tuk.dev/assets/templates/Project+Management/pm_13.png"
-                                alt=""
-                                className="h-full w-full rounded-full overflow-hidden shadow"
-                              />
-                            </div>
-                            <p className="ml-2 text-gray-800 tracking-normal leading-4 text-sm">
-                              Carrie Anthony
-                            </p>
-                          </div>
-                        </td>
-                        <td className="text-sm pr-6 whitespace-no-wrap text-gray-800 tracking-normal leading-4">
-                          $2,500
-                        </td>
-                        <td className="text-sm pr-6 whitespace-no-wrap text-gray-800 tracking-normal leading-4">
-                          02.03.20
-                        </td>
-                        <td className="pr-6 relative tooltip-corner">
-                          <div className="w-2 h-2 rounded-full bg-indigo-400 mx-auto"></div>
-                          <div
-                            className="absolute -mt-4 -ml-2 top-0 z-20 hidden tooltip"
-                            role="tooltip"
-                          >
-                            <div className="absolute shadow-lg pt-4 pr-2 pl-3 pb-4 bg-white text-gray-600 rounded w-20 relative">
-                              <svg
-                                className="absolute bottom-0 -mb-2"
-                                width="16px"
-                                height="8px"
-                                viewBox="0 0 16 8"
-                                version="1.1"
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <g
-                                  id="Page-1"
-                                  stroke="none"
-                                  strokeWidth="1"
-                                  fill="none"
-                                  fillRule="evenodd"
-                                >
-                                  <g
-                                    id="Tooltips-"
-                                    transform="translate(-84.000000, -203.000000)"
-                                    fill="#FFFFFF"
-                                  >
-                                    <g
-                                      id="Group-3-Copy"
-                                      transform="translate(76.000000, 145.000000)"
-                                    >
-                                      <polygon
-                                        className="shadow"
-                                        id="Triangle"
-                                        transform="translate(16.000000, 62.000000) rotate(-180.000000) translate(-16.000000, -62.000000) "
-                                        points="16 58 24 66 8 66"
-                                      ></polygon>
-                                    </g>
-                                  </g>
-                                </g>
-                              </svg>
-                              <p className="text-xs text-gray-600 leading-4">Waiting</p>
-                            </div>
-                          </div>
-                        </td>
-                        <td className="pr-8 relative">
-                          <div className="dropdown flex justify-end">
-                            <svg
-                              onClick="dropdownFunction(this)"
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="dropbtn text-gray-500 hover:text-gray-600 icon icon-tabler icon-tabler-dots-vertical"
-                              width="28"
-                              height="28"
-                              viewBox="0 0 24 24"
-                              strokeWidth="1.5"
-                              stroke="currentColor"
-                              fill="none"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            >
-                              <path stroke="none" d="M0 0h24v24H0z" />
-                              <circle cx="12" cy="12" r="1" />
-                              <circle cx="12" cy="19" r="1" />
-                              <circle cx="12" cy="5" r="1" />
-                            </svg>
-                            <div
-                              id="myDropdown1"
-                              className="dropdown-content mr-5 absolute overflow-auto shadow-md z-10"
-                            >
-                              <ul className="bg-white shadow rounded mt-2 py-1 w-48">
-                                <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-3 hover:bg-indigo-700 hover:text-white px-3 font-normal">
-                                  Edit
-                                </li>
-                                <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-3 hover:bg-indigo-700 hover:text-white px-3 font-normal">
-                                  Delete
-                                </li>
-                                <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-3 hover:bg-indigo-700 hover:text-white px-3 font-normal">
-                                  Duplicate
-                                </li>
-                              </ul>
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                    </tbody>
+                    <tbody>{policiesLists}</tbody>
                   </table>
                 </div>
               </div>

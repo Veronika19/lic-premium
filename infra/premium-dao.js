@@ -5,7 +5,7 @@ export const addPremium = async (premiumData) => {
     const findAll = await db.Premium.create(premiumData);
     return findAll;
   } catch (err) {
-    return err.message;
+    throw err.message;
   }
 };
 
@@ -14,7 +14,7 @@ export const findAllPremium = async () => {
     const findAll = await db.Premium.findAll();
     return findAll;
   } catch (err) {
-    return err.message;
+    throw err.message;
   }
 };
 

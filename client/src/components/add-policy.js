@@ -1,7 +1,9 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import axios from 'axios';
+import { addPolicy } from '../actions/policyActions';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import Flash from '../flash';
 
@@ -19,6 +21,9 @@ const schema = yup
   .required();
 
 const AddPolicy = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const {
     register,
     formState: { errors },
@@ -26,15 +31,9 @@ const AddPolicy = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const onSubmit = async (data) => {
+  const onSubmit = (data) => {
     console.log('datttaaa', data);
-    window.flash('Saving data in progress', 'danger');
-    try {
-      const rData = await axios.post('/premium/add', data);
-      console.log('===rData', rData);
-    } catch (err) {
-      console.log('====err', err);
-    }
+    dispatch(addPolicy(data, navigate));
   };
 
   return (

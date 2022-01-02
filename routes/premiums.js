@@ -25,10 +25,8 @@ router.post('/add', async (req, res) => {
 router.get('/find', async (req, res) => {
   try {
     const savedData = await findAllPremium();
-    console.log('=====savedData', savedData);
     res.status(200).json({ status: true, content: savedData });
   } catch (err) {
-    console.log('=========', err);
     res.status(400).send({ status: false, content: err });
   }
 });
