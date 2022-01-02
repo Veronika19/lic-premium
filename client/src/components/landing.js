@@ -57,13 +57,7 @@ export default function App() {
           <div className="w-full">
             <div className="bg-white mt-10 flex flex-col items-start justify-between pt-4 pb-4 sm:pt-8 px-5 sm:px-10 shadow rounded-t">
               <div className="flex items-center mb-4 xl:mb-0">
-                <h2 className="text-gray-800 text-2xl ">User Experience Revamp and Optimization</h2>
-                <button
-                  id="downloadAll-btn"
-                  className="bg-gray-200 transition duration-150 ease-in-out focus:outline-none hover:bg-gray-300 rounded text-indigo-500 px-5 h-8 flex items-center text-sm"
-                >
-                  <Link to="/add-policy">Add Policy</Link>
-                </button>
+                <h2 className="text-gray-800 text-2xl ">LIC Premium Management System</h2>
               </div>
             </div>
           </div>
@@ -74,7 +68,7 @@ export default function App() {
           <div className="container mx-auto">
             <div className="w-full">
               <div className="container mx-auto bg-white py-5 flex items-start sm:items-center justify-between px-5 sm:px-10 shadow rounded-t">
-                <h2 className="text-gray-800 text-2xl">Invoice Report</h2>
+                <h2 className="text-gray-800 text-2xl">Policy Lists</h2>
               </div>
 
               <div className="mx-auto mb-10 bg-white shadow">
@@ -156,32 +150,6 @@ export default function App() {
                       >
                         Download All
                       </button>
-
-                      <div
-                        id="addReport-btn"
-                        className="ml-4 cursor-pointer focus:outline-none bg-indigo-500 transition duration-150 ease-in-out hover:bg-indigo-600 w-8 h-8 rounded flex items-center justify-center"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="text-white icon icon-tabler icon-tabler-plus"
-                          width="28"
-                          height="28"
-                          viewBox="0 0 24 24"
-                          strokeWidth="1.5"
-                          stroke="currentColor"
-                          fill="none"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path stroke="none" d="M0 0h24v24H0z" />
-                          <line x1="12" y1="5" x2="12" y2="19" />
-                          <line x1="5" y1="12" x2="19" y2="12" />
-                        </svg>
-                      </div>
-                      <div
-                        id="report-modal"
-                        className="hidden fixed z-10 lg:pt-5 left-0 top-0 w-full h-full overflow-auto shadow-lg display: none;"
-                      ></div>
                     </div>
                   </div>
                 </div>
