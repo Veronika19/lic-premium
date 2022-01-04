@@ -38,6 +38,14 @@ let premiumSch = connection.define(
       type: Sequelize.FLOAT,
       allowNull: false,
     },
+    dlp: {
+      type: Sequelize.DATEONLY,
+      allowNull: false,
+    },
+    mobile_number: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
   },
   {
     underscored: true,

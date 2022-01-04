@@ -11,12 +11,20 @@ const schema = yup
   .object({
     first_name: yup.string().trim().required(`Please enter first name`),
     last_name: yup.string().trim().required(`Please enter last name`),
+    premium_amt: yup.string().trim().required(`Please enter premium amt`),
     policy_number: yup
       .number()
       .positive('Enter a positive number')
       .integer('Should be a whole number')
       .typeError('Enter the policy number'),
-    date_of_commence: yup.date().typeError('Enter a valid date'),
+    date_of_commence: yup
+      .date()
+      .max(new Date(), 'Please check the entered date')
+      .typeError('Enter a valid date'),
+    dlp: yup
+      .date()
+      .max(new Date(), 'Please check the entered date')
+      .typeError('Enter a valid date'),
   })
   .required();
 
@@ -51,7 +59,7 @@ const AddPolicy = () => {
                   className="block text-gray-700 text-sm font-bold mb-2"
                   htmlFor="policy_number"
                 >
-                  Policy Number
+                  Policy Number*
                 </label>
                 <input
                   {...register('policy_number')}
@@ -64,7 +72,7 @@ const AddPolicy = () => {
               </div>
               <div className="mb-4">
                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="firstname">
-                  First Name
+                  First Name*
                 </label>
                 <input
                   {...register('first_name')}
@@ -77,7 +85,7 @@ const AddPolicy = () => {
               </div>
               <div className="mb-4">
                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="lastname">
-                  Last Name
+                  Last Name*
                 </label>
                 <input
                   {...register('last_name')}
@@ -93,7 +101,7 @@ const AddPolicy = () => {
                   className="block text-gray-700 text-sm font-bold mb-2"
                   htmlFor="date_of_commence"
                 >
-                  Date of Commence
+                  Date of Commence*
                 </label>
                 <input
                   {...register('date_of_commence')}
@@ -106,7 +114,7 @@ const AddPolicy = () => {
               </div>
               <div className="mb-6">
                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="table_term">
-                  Table Term
+                  Table Term*
                 </label>
                 <input
                   {...register('table_term')}
@@ -119,20 +127,23 @@ const AddPolicy = () => {
               </div>
               <div className="mb-6">
                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="pay_mode">
-                  Pay Mode
+                  Pay Mode*
                 </label>
-                <input
-                  {...register('pay_mode')}
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  id="pay_mode"
-                  type="text"
-                  placeholder="Mode Of Payment"
-                />
-                <p className="text-red-500 text-xs italic">{errors.pay_mode?.message}</p>
+                <div className="relative">
+                  <select
+                    {...register('pay_mode')}
+                    className="block appearance-none w-full border text-gray-700 py-2 px-3 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    id="pay_mode"
+                  >
+                    <option value="quarterly">Quarterly</option>
+                    <option value="half-yearly">Half Yearly</option>
+                    <option value="yearly">Yearly</option>
+                  </select>
+                </div>
               </div>
               <div className="mb-6">
                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="premium_amt">
-                  Premium Amount
+                  Premium Amount*
                 </label>
                 <input
                   {...register('premium_amt')}
@@ -143,17 +154,40 @@ const AddPolicy = () => {
                 />
                 <p className="text-red-500 text-xs italic">{errors.premium_amt?.message}</p>
               </div>
+              <div className="mb-6">
+                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="dlp">
+                  DLP(Date of last premium)*
+                </label>
+                <input
+                  {...register('dlp')}
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="dlp"
+                  type="date"
+                  placeholder="Date of last premium"
+                />
+                <p className="text-red-500 text-xs italic">{errors.dlp?.message}</p>
+              </div>
+              <div className="mb-6">
+                <label
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                  htmlFor="mobile_number"
+                >
+                  Mobile Number*
+                </label>
+                <input
+                  {...register('mobile_number')}
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="mobile_number"
+                  type="text"
+                  placeholder="Mobile Number"
+                />
+                <p className="text-red-500 text-xs italic">{errors.mobile_number?.message}</p>
+              </div>
               <div className="flex items-center justify-between">
                 <input
                   className="cursor-pointer bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                   type="submit"
                 />
-                <a
-                  className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-                  href="#"
-                >
-                  Forgot Password?
-                </a>
               </div>
             </form>
           </div>

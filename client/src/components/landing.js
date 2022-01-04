@@ -45,6 +45,12 @@ export default function App() {
           <td className="text-sm pr-6 whitespace-no-wrap text-gray-800 tracking-normal leading-4">
             {each.premium_amt}
           </td>
+          <td className="text-sm pr-6 whitespace-no-wrap text-gray-800 tracking-normal leading-4">
+            {each.dlp}
+          </td>
+          <td className="text-sm pr-6 whitespace-no-wrap text-gray-800 tracking-normal leading-4">
+            <a href={`tel: ${each.mobile_number}`}>{each.mobile_number}</a>
+          </td>
         </tr>
       );
     });
@@ -181,6 +187,12 @@ export default function App() {
                         </th>
                         <th className="text-gray-600 font-normal pr-6 text-left text-sm tracking-normal leading-4">
                           Premium amount
+                        </th>
+                        <th className="text-gray-600 font-normal pr-6 text-left text-sm tracking-normal leading-4">
+                          DLP
+                        </th>
+                        <th className="text-gray-600 font-normal pr-6 text-left text-sm tracking-normal leading-4">
+                          Moble Number
                         </th>
                       </tr>
                     </thead>

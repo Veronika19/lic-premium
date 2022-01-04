@@ -53,8 +53,8 @@ const Flash = () => {
           <p className="text-lg text-gray-800 font-semibold pb-1">Attention Needed</p>
           <p className="text-sm text-gray-600 font-normal">
             {Array.isArray(message)
-              ? message.map((each) => {
-                  return <li>{each}</li>;
+              ? message.map((each, index) => {
+                  return <li key={index}>{each}</li>;
                 })
               : message}
           </p>
