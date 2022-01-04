@@ -1,11 +1,41 @@
 import { Link } from 'react-router-dom';
+import { useRef } from 'react';
 
 const Nav = () => {
+  const openMenu = useRef(null);
+  const closeMenu = useRef(null);
+  const menuBox = useRef(null);
+
+  const MenuHandler = (el, val) => {
+    // const el = inputRef.current;
+    let MainList = el.parentElement.parentElement.getElementsByTagName('ul')[0];
+    let closeIcon = el.parentElement.parentElement.getElementsByClassName('close-m-menu')[0];
+    let showIcon = el.parentElement.parentElement.getElementsByClassName('show-m-menu')[0];
+    if (val) {
+      MainList.classList.remove('hidden');
+      el.classList.add('hidden');
+      closeIcon.classList.remove('hidden');
+    } else {
+      showIcon.classList.remove('hidden');
+      MainList.classList.add('hidden');
+      el.classList.add('hidden');
+    }
+  };
+
+  const closeOpenMenu = () => {
+    // let closeIcon = closeMenu.getElementsByClassName('close-m-menu')[0];
+    // let showIcon = openMenu.getElementsByClassName('show-m-menu')[0];
+    console.log(menuBox.current);
+    menuBox.current.classList.add('hidden');
+    // showIcon.classList.remove('hidden');
+    // closeIcon.classList.add('hidden');
+  };
+
   return (
     <div className="w-full mx-auto bg-white shadow px-5 sm:px-10">
       <div className="container justify-between h-16 flex items-center lg:items-stretch mx-auto px-5 sm:px-10">
         <div className="h-full flex items-center">
-          <a href="index.html">
+          <Link to="/">
             <div className="mr-10 flex items-center">
               <svg
                 width="108px"
@@ -45,7 +75,7 @@ const Nav = () => {
                 </g>
               </svg>
             </div>
-          </a>
+          </Link>
           <ul className="pr-12 xl:flex items-center h-full hidden">
             <li className="cursor-pointer h-full flex items-center text-sm text-gray-800 tracking-normal border-b-2 border-transparent">
               <Link to="/">Dashboard</Link>
@@ -238,105 +268,37 @@ const Nav = () => {
           </div>
         </div>
         <div className="lg:hidden cursor-pointer text-gray-700 hover:text-gray-700 focus:outline-none transition duration-150 ease-in-out">
-          <ul className="top-0 z-40 p-2 border-r bg-white absolute rounded left-0 right-0 shadow mt-16 md:mt-16 hidden">
-            <a href="index.html">
-              <li className="flex lg:hidden cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+          <ul
+            ref={menuBox}
+            className="top-0 z-40 p-2 border-r bg-white absolute rounded left-0 right-0 shadow mt-16 md:mt-16 hidden"
+          >
+            <Link to="/">
+              <li
+                onClick={() => closeOpenMenu()}
+                className="flex lg:hidden cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none"
+              >
                 <div className="flex items-center">
                   <span className="ml-2 font-bold">Dashboard</span>
                 </div>
               </li>
-            </a>
-            <a href="project-overview-bl.html">
+            </Link>
+            <Link to="/add-policy">
               <li
+                onClick={() => closeOpenMenu()}
                 className="flex lg:hidden flex-col cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none flex justify-center"
-                onClick="dropdownHandler(this)"
               >
                 <div className="flex items-center">
-                  <span className="ml-2 font-bold">Project Overview</span>
+                  <span className="ml-2 font-bold">Add Policy</span>
                 </div>
               </li>
-            </a>
-            <li className="ml-2 cursor-pointer text-gray-600 text-base leading-3 tracking-normal pt-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
-              <input
-                className="border-b border-gray-300 w-56 focus:outline-none text-gray-800 pb-1"
-                placeholder="Search"
-              />
-            </li>
-            <li className="ml-2 cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-indigo-700 flex items-center focus:text-indigo-700 focus:outline-none">
-              <div className="flex items-center">
-                <div className="w-12 cursor-pointer flex text-sm border-2 border-transparent rounded focus:outline-none focus:border-white transition duration-150 ease-in-out">
-                  <img
-                    className="rounded h-10 w-10 object-cover"
-                    src="https://tuk-cdn.s3.amazonaws.com/assets/components/horizontal_navigation/hn_1.png"
-                    alt="logo"
-                  />
-                </div>
-                <p className="leading-6 text-base ml-1 cursor-pointer">Jane Doe</p>
-                <div className="sm:ml-2 text-white relative">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="icon icon-tabler icon-tabler-chevron-down cursor-pointer"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    fill="none"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path stroke="none" d="M0 0h24v24H0z"></path>
-                    <polyline points="6 9 12 15 18 9"></polyline>
-                  </svg>
-                </div>
-              </div>
-            </li>
-            <li className="ml-2 cursor-pointer text-gray-600 text-base leading-3 tracking-normal pt-2 pb-4 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
-              <div className="flex items-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="icon icon-tabler icon-tabler-settings"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" />
-                  <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                  <circle cx="12" cy="12" r="3" />
-                </svg>
-                <span className="leading-6 ml-2">Account Setting</span>
-              </div>
-            </li>
-            <li className="ml-2 cursor-pointer text-gray-600 text-base leading-3 tracking-normal pt-2 pb-4 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
-              <div className="flex items-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="icon icon-tabler icon-tabler-help"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" />
-                  <circle cx="12" cy="12" r="9" />
-                  <line x1="12" y1="17" x2="12" y2="17.01" />
-                  <path d="M12 13.5a1.5 1.5 0 0 1 1 -1.5a2.6 2.6 0 1 0 -3 -4" />
-                </svg>
-                <span className="leading-6 ml-2">Help Center</span>
-              </div>
-            </li>
+            </Link>
           </ul>
           <div>
-            <div className="show-m-menu lg:hidden" onClick="MenuHandler(this,true)">
+            <div
+              ref={openMenu}
+              className="show-m-menu lg:hidden"
+              onClick={() => MenuHandler(openMenu.current, true)}
+            >
               <svg
                 aria-haspopup="true"
                 aria-label="Main Menu"
@@ -355,7 +317,11 @@ const Nav = () => {
                 <line x1="4" y1="16" x2="20" y2="16" />
               </svg>
             </div>
-            <div onClick="MenuHandler(this,false)" className="hidden close-m-menu">
+            <div
+              ref={closeMenu}
+              onClick={() => MenuHandler(closeMenu.current, false)}
+              className="hidden close-m-menu"
+            >
               <svg
                 aria-label="Close"
                 xmlns="http://www.w3.org/2000/svg"
