@@ -63,7 +63,7 @@ export default function App() {
           <div className="w-full">
             <div className="bg-white mt-10 flex flex-col items-start justify-between pt-4 pb-4 sm:pt-8 px-5 sm:px-10 shadow rounded-t">
               <div className="flex items-center mb-4 xl:mb-0">
-                <h2 className="text-gray-800 text-2xl ">LIC Premium Management System</h2>
+                <h2 className="text-gray-800 text-2xl ">LIC Policy Management System</h2>
               </div>
             </div>
           </div>

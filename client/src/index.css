@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  .set_menu_active {
+    @apply cursor-pointer h-full flex items-center text-sm text-indigo-500 mx-10 tracking-normal border-b-2 border-indigo-500;
+  }
+
+  .set_menu_in_active {
+    @apply cursor-pointer h-full flex items-center text-sm text-gray-800 tracking-normal border-b-2 border-transparent;
+  }
+}
+
 .dropdown-content {
   display: none;
   min-width: 160px;

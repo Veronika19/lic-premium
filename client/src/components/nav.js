@@ -1,7 +1,8 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useRef } from 'react';
 
 const Nav = () => {
+  const { pathname } = useLocation();
   const openMenu = useRef(null);
   const closeMenu = useRef(null);
   const menuBox = useRef(null);
@@ -23,12 +24,9 @@ const Nav = () => {
   };
 
   const closeOpenMenu = () => {
-    // let closeIcon = closeMenu.getElementsByClassName('close-m-menu')[0];
-    // let showIcon = openMenu.getElementsByClassName('show-m-menu')[0];
-    console.log(menuBox.current);
     menuBox.current.classList.add('hidden');
-    // showIcon.classList.remove('hidden');
-    // closeIcon.classList.add('hidden');
+    openMenu.current.classList.remove('hidden');
+    closeMenu.current.classList.add('hidden');
   };
 
   return (
@@ -77,10 +75,10 @@ const Nav = () => {
             </div>
           </Link>
           <ul className="pr-12 xl:flex items-center h-full hidden">
-            <li className="cursor-pointer h-full flex items-center text-sm text-gray-800 tracking-normal border-b-2 border-transparent">
+            <li className={pathname === '/' ? 'set_menu_active' : 'set_menu_in_active'}>
               <Link to="/">Dashboard</Link>
             </li>
-            <li className="cursor-pointer h-full flex items-center text-sm text-indigo-500 mx-10 tracking-normal border-b-2 border-indigo-500">
+            <li className={pathname === '/add-policy' ? 'set_menu_active' : 'set_menu_in_active'}>
               <Link to="/add-policy">Add Policy</Link>
             </li>
           </ul>
